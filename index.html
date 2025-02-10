@@ -3,105 +3,167 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blooming Flower Effect</title>
+  <title>Flower Animation</title>
   <style>
     /* Import custom fonts */
     @font-face {
       font-family: 'CodeProLC';
-      src: url('fonts/CodeProLC.ttf') format('truetype'); /* Adjust the file extension if necessary */
+      src: url('fonts/CodeProLC.ttf') format('truetype');
     }
 
     @font-face {
       font-family: 'CodeProLight';
-      src: url('fonts/CodeProLight.otf') format('opentype'); /* Adjust the file extension if necessary */
+      src: url('fonts/CodeProLight.otf') format('opentype');
     }
 
     /* MOBILE DEFAULTS (0-600px) */
     :root {
       --base-delay: 0.2s;
       --animation-duration: 2s;
-      --shrink-scale: 0.2;    /* Larger flower on mobile */
-      --move-up: -1950px;     /* More upward movement */
-      --flower-width: 80px;   /* Bigger base size */
-      --flower-height: 80px;
-      --font-size: 1rem;      /* Adjustable font size variable */
-      --font-akhand: 'CodeProLC', sans-serif; /* Font for 'Akhand' */
-      --font-jaap: 'CodeProLight', sans-serif; /* Font for 'JAAP' */
+      --shrink-scale: 0.2;
+      --move-up: -385px;
+      --flower-width: 400px;
+      --flower-height: 400px;
+      --font-size: 0.75rem;
+      --font-akhand: 'CodeProLC', sans-serif;
+      --font-jaap: 'CodeProLight', sans-serif;
+      --text-top-mobile: -325px; /* Adjusted spacing to 10px for better positioning */
     }
 
     /* DESKTOP OVERRIDES (601px+) */
     @media (min-width: 601px) {
       :root {
-        --shrink-scale: 0.25;  /* Smaller flower on PC */
-        --move-up: -1700px;    /* Less upward movement */
-        --flower-width: 100px; /* Smaller base size */
-        --flower-height: 100px;
-        --font-size: 1.25rem;   /* Larger font size for desktop */
+        --shrink-scale: 0.25;
+        --move-up: -425px;
+        --flower-width: 400px;
+        --flower-height: 400px;
+        --font-size: 1.25rem;
+        --text-top-desktop: -310px;
       }
     }
 
     body {
-      background-color: #36B5BE;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      background-color: #36B5BE;
       margin: 0;
-      position: relative;
-      flex-direction: column; /* Align items vertically */
+      overflow: hidden; /* Prevent scrollbars on the body */
+      flex-direction: column; /* Stack the flower and text vertically */
     }
 
     .flower {
-      position: absolute; /* Absolute position so we can control its placement */
+      position: relative;
       width: var(--flower-width);
       height: var(--flower-height);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: shrinkMove var(--animation-duration) ease-out forwards;
-      animation-delay: calc(var(--base-delay) * 18);
+      overflow: visible; /* Ensure the animation stays visible outside the container */
+      animation: moveAndShrink var(--animation-duration) ease-out forwards, moveAndRotate 2s ease-out forwards;
+      animation-delay: 2s;
     }
 
     .petal {
       position: absolute;
-      width: 200px;
-      height: 320px;
-      background-image: url('images/leaf1.svg'); /* Updated path */
-      background-size: contain;
-      background-repeat: no-repeat;
+      top: 0;
+      left: 0;
       transform-origin: center;
       opacity: 0.5;
-      animation: bloom 1.5s ease-out forwards;
     }
 
-    @keyframes bloom {
-      0% { transform: rotate(0deg) translateY(-50%); opacity: 0.5; }
-      100% { opacity: 0.5; }
+    .petal1 {
+      animation: moveAndRotate1 2s ease-out forwards;
     }
 
-    @keyframes shrinkMove {
-      0% { transform: scale(1) translateY(0); }
-      50% { transform: scale(var(--shrink-scale)); }
-      100% { transform: scale(var(--shrink-scale)) translateY(var(--move-up)); }
+    .petal2 {
+      animation: moveAndRotate2 2s ease-out forwards;
     }
 
-    .petal:nth-child(1) { animation-delay: calc(var(--base-delay) * 1); }
-    .petal:nth-child(2) { animation-delay: calc(var(--base-delay) * 2); transform: rotate(45deg); }
-    .petal:nth-child(3) { animation-delay: calc(var(--base-delay) * 3); transform: rotate(90deg); }
-    .petal:nth-child(4) { animation-delay: calc(var(--base-delay) * 4); transform: rotate(135deg); }
-    .petal:nth-child(5) { animation-delay: calc(var(--base-delay) * 5); transform: rotate(180deg); }
-    .petal:nth-child(6) { animation-delay: calc(var(--base-delay) * 6); transform: rotate(225deg); }
-    .petal:nth-child(7) { animation-delay: calc(var(--base-delay) * 7); transform: rotate(270deg); }
-    .petal:nth-child(8) { animation-delay: calc(var(--base-delay) * 8); transform: rotate(315deg); }
+    .petal3 {
+      animation: moveAndRotate3 2s ease-out forwards;
+    }
+
+    .petal4 {
+      animation: moveAndRotate4 2s ease-out forwards;
+    }
+
+    .petal5 {
+      animation: moveAndRotate5 2s ease-out forwards;
+    }
+
+    .petal6 {
+      animation: moveAndRotate6 2s ease-out forwards;
+    }
+
+    .petal7 {
+      animation: moveAndRotate7 2s ease-out forwards;
+    }
+
+    .petal8 {
+      animation: moveAndRotate8 2s ease-out forwards;
+    }
+
+    /* Keyframe animation for the shrink and move up effect */
+    @keyframes moveAndShrink {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(0) scale(var(--shrink-scale));
+      }
+      100% {
+        transform: translateY(var(--move-up)) scale(var(--shrink-scale));
+      }
+    }
+
+    /* Keyframe animations for moving and rotating petals */
+    @keyframes moveAndRotate1 {
+      0% { transform: translateY(-50%) rotate(-360deg); }
+      100% { transform: translateY(0) rotate(45deg); }
+    }
+
+    @keyframes moveAndRotate2 {
+      0% { transform: translateY(-50%) rotate(-450deg); }
+      100% { transform: translateY(0) rotate(45deg); }
+    }
+
+    @keyframes moveAndRotate3 {
+      0% { transform: translateY(-50%) rotate(-495deg); }
+      100% { transform: translateY(0) rotate(45deg); }
+    }
+
+    @keyframes moveAndRotate4 {
+      0% { transform: translateY(-50%) rotate(-135deg); }
+      100% { transform: translateY(0) rotate(45deg); }
+    }
+
+    @keyframes moveAndRotate5 {
+      0% { transform: translateY(-50%) rotate(-180deg); }
+      100% { transform: translateY(0) rotate(45deg); }
+    }
+
+    @keyframes moveAndRotate6 {
+      0% { transform: translateY(-50%) rotate(-225deg); }
+      100% { transform: translateY(0) rotate(45deg); }
+    }
+
+    @keyframes moveAndRotate7 {
+      0% { transform: translateY(-50%) rotate(-270deg); }
+      100% { transform: translateY(0) rotate(45deg); }
+    }
+
+    @keyframes moveAndRotate8 {
+      0% { transform: translateY(-50%) rotate(-315deg); }
+      100% { transform: translateY(0) rotate(45deg); }
+    }
 
     /* New fade-in animation for the "AkhandJaap" text */
     .akhandjaap {
       opacity: 0;
-      font-size: var(--font-size); /* Use the font-size variable */
+      font-size: var(--font-size);
       color: white;
       text-align: center;
       animation: fadeIn 2s ease-out forwards;
-      animation-delay: calc(var(--base-delay) * 18 + var(--animation-duration)); /* Delay until flower animation completes */
+      animation-delay: 4s;
     }
 
     @keyframes fadeIn {
@@ -112,36 +174,103 @@
     /* Adjust the position of the "AkhandJaap" text to appear directly below the flower */
     .akhandjaap-container {
       position: absolute;
-      top: calc(var(--flower-height) + 15px); /* 20px below the flower */
+      top: calc(var(--flower-height) + var(--text-top-mobile)); /* Adjusted spacing for mobile */
       width: 100%;
+    }
+
+    @media (min-width: 601px) {
+      .akhandjaap-container {
+        top: calc(var(--flower-height) + var(--text-top-desktop));
+      }
     }
 
     /* Styling for "Akhand" and "JAAP" with different fonts */
     .akhandjaap .akhand {
-      font-family: var(--font-akhand); /* CodeProLC for "Akhand" */
+      font-family: var(--font-akhand);
     }
 
     .akhandjaap .jaap {
-      font-family: var(--font-jaap); /* CodeProLight for "JAAP" */
+      font-family: var(--font-jaap);
     }
+/* Animated line styling */
+.akhandjaap-container::after {
+  content: "";
+  position: absolute;
+  top: 20px; /* Spacing between the text and line for mobile */
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transform: translateX(-50%);
+  animation: lineGrowMobile 2s ease-out forwards;
+  animation-delay: 4s; /* Adjusted delay */
+}
+
+/* Line animation for mobile */
+@keyframes lineGrowMobile {
+  0% {
+    width: 0;
+    left: 50%;
+  }
+  100% {
+    width: calc(50% + 200px); /* Smaller line on mobile */
+    left: 50%;
+  }
+}
+
+/* Line animation for desktop */
+@media (min-width: 601px) {
+  .akhandjaap-container::after {
+    animation: lineGrowDesktop 2s ease-out forwards;
+    animation-delay: 4s; /* Adjusted delay */
+    top: 30px; /* Adjusted spacing for desktop */
+  }
+
+  @keyframes lineGrowDesktop {
+    0% {
+      width: 0;
+      left: 50%;
+    }
+    100% {
+      width: calc(50% + 850px); /* Wider line for desktop */
+      left: 50%;
+    }
+  }
+}
+
   </style>
 </head>
 <body>
-  <div class="flower">
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-  </div>
+  <svg class="flower" viewBox="0 0 300 300">
+      <!-- First petal rotating to position 1 -->
+      <path class="petal petal1" style="fill:#FFFFFF;fill-opacity:0.5;" d="M69.681,69.69c0,0,36.864,116.104,76.479,76.475C185.784,106.546,69.681,69.69,69.681,69.69z"></path>
+      
+      <!-- Second petal rotating to position 3 -->
+      <path class="petal petal2" style="fill:#FFFFFF;fill-opacity:0.5;" d="M146.16,38c0,0-56.041,108.165,0,108.165C202.211,146.165,146.16,38,146.16,38z"></path>
+      
+      <!-- Third petal rotating to position 2 -->
+      <path class="petal petal3" style="fill:#FFFFFF;fill-opacity:0.5;" d="M222.65,69.69c0,0-116.114,36.855-76.49,76.475C185.784,185.794,222.65,69.69,222.65,69.69z"></path>
+  
+      <!-- Fourth petal rotating to position 4 -->
+      <path class="petal petal4" style="fill:#FFFFFF;fill-opacity:0.5;" d="M254.32,146.165c0,0-108.16-56.031-108.16,0C146.16,202.206,254.32,146.165,254.32,146.165z"></path>
+  
+      <!-- Fifth petal rotating to new position -->
+      <path class="petal petal5" style="fill:#FFFFFF;fill-opacity:0.5;" d="M222.65,222.649c0,0-36.866-116.104-76.49-76.484C106.536,185.794,222.65,222.649,222.65,222.649z"></path>
+  
+      <!-- New sixth petal rotating to new position -->
+      <path class="petal petal6" style="fill:#FFFFFF;fill-opacity:0.5;" d="M146.16,254.33c0,0,56.051-108.165,0-108.165C90.119,146.165,146.16,254.33,146.16,254.33z"></path>
+  
+      <!-- New seventh petal rotating to position -->
+      <path class="petal petal7" style="fill:#FFFFFF;fill-opacity:0.5;" d="M69.681,222.649c0,0,116.104-36.855,76.479-76.484C106.545,106.546,69.681,222.649,69.681,222.649z"></path>
+  
+      <!-- New eighth petal rotating to position -->
+      <path class="petal petal8" style="fill:#FFFFFF;fill-opacity:0.5;" d="M38,146.165c0,0,108.16,56.041,108.16,0C146.16,90.134,38,146.165,38,146.165z"></path>
+  </svg>
 
-  <!-- Wrap the "AkhandJaap" text inside a container and position it below the flower -->
+  <!-- AKHAND JAAP Text with Fade In -->
   <div class="akhandjaap-container">
     <div class="akhandjaap">
-      <span class="akhand">AKHAND</span><span class="jaap">JAAP</span>
+      <span class="akhand">AKHAND</span> <span class="jaap">JAAP</span>
     </div>
   </div>
 </body>
