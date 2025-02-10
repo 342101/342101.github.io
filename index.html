@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blooming Flower Effect</title>
+  <style>
+    /* Import custom fonts */
+    @font-face {
+      font-family: 'CodeProLC';
+      src: url('fonts/CodeProLC.ttf') format('truetype'); /* Adjust the file extension if necessary */
+    }
+
+    @font-face {
+      font-family: 'CodeProLight';
+      src: url('fonts/CodeProLight.otf') format('opentype'); /* Adjust the file extension if necessary */
+    }
+
+    /* MOBILE DEFAULTS (0-600px) */
+    :root {
+      --base-delay: 0.2s;
+      --animation-duration: 2s;
+      --shrink-scale: 0.2;    /* Larger flower on mobile */
+      --move-up: -1950px;     /* More upward movement */
+      --flower-width: 80px;   /* Bigger base size */
+      --flower-height: 80px;
+      --font-size: 1rem;      /* Adjustable font size variable */
+      --font-akhand: 'CodeProLC', sans-serif; /* Font for 'Akhand' */
+      --font-jaap: 'CodeProLight', sans-serif; /* Font for 'JAAP' */
+    }
+
+    /* DESKTOP OVERRIDES (601px+) */
+    @media (min-width: 601px) {
+      :root {
+        --shrink-scale: 0.25;  /* Smaller flower on PC */
+        --move-up: -1700px;    /* Less upward movement */
+        --flower-width: 100px; /* Smaller base size */
+        --flower-height: 100px;
+        --font-size: 1.25rem;   /* Larger font size for desktop */
+      }
+    }
+
+    body {
+      background-color: #36B5BE;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+      flex-direction: column; /* Align items vertically */
+    }
+
+    .flower {
+      position: absolute; /* Absolute position so we can control its placement */
+      width: var(--flower-width);
+      height: var(--flower-height);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: shrinkMove var(--animation-duration) ease-out forwards;
+      animation-delay: calc(var(--base-delay) * 18);
+    }
+
+    .petal {
+      position: absolute;
+      width: 200px;
+      height: 320px;
+      background-image: url('images/leaf1.svg'); /* Updated path */
+      background-size: contain;
+      background-repeat: no-repeat;
+      transform-origin: center;
+      opacity: 0.5;
+      animation: bloom 1.5s ease-out forwards;
+    }
+
+    @keyframes bloom {
+      0% { transform: rotate(0deg) translateY(-50%); opacity: 0.5; }
+      100% { opacity: 0.5; }
+    }
+
+    @keyframes shrinkMove {
+      0% { transform: scale(1) translateY(0); }
+      50% { transform: scale(var(--shrink-scale)); }
+      100% { transform: scale(var(--shrink-scale)) translateY(var(--move-up)); }
+    }
+
+    .petal:nth-child(1) { animation-delay: calc(var(--base-delay) * 1); }
+    .petal:nth-child(2) { animation-delay: calc(var(--base-delay) * 2); transform: rotate(45deg); }
+    .petal:nth-child(3) { animation-delay: calc(var(--base-delay) * 3); transform: rotate(90deg); }
+    .petal:nth-child(4) { animation-delay: calc(var(--base-delay) * 4); transform: rotate(135deg); }
+    .petal:nth-child(5) { animation-delay: calc(var(--base-delay) * 5); transform: rotate(180deg); }
+    .petal:nth-child(6) { animation-delay: calc(var(--base-delay) * 6); transform: rotate(225deg); }
+    .petal:nth-child(7) { animation-delay: calc(var(--base-delay) * 7); transform: rotate(270deg); }
+    .petal:nth-child(8) { animation-delay: calc(var(--base-delay) * 8); transform: rotate(315deg); }
+
+    /* New fade-in animation for the "AkhandJaap" text */
+    .akhandjaap {
+      opacity: 0;
+      font-size: var(--font-size); /* Use the font-size variable */
+      color: white;
+      text-align: center;
+      animation: fadeIn 2s ease-out forwards;
+      animation-delay: calc(var(--base-delay) * 18 + var(--animation-duration)); /* Delay until flower animation completes */
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Adjust the position of the "AkhandJaap" text to appear directly below the flower */
+    .akhandjaap-container {
+      position: absolute;
+      top: calc(var(--flower-height) + 15px); /* 20px below the flower */
+      width: 100%;
+    }
+
+    /* Styling for "Akhand" and "JAAP" with different fonts */
+    .akhandjaap .akhand {
+      font-family: var(--font-akhand); /* CodeProLC for "Akhand" */
+    }
+
+    .akhandjaap .jaap {
+      font-family: var(--font-jaap); /* CodeProLight for "JAAP" */
+    }
+  </style>
+</head>
+<body>
+  <div class="flower">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+  </div>
+
+  <!-- Wrap the "AkhandJaap" text inside a container and position it below the flower -->
+  <div class="akhandjaap-container">
+    <div class="akhandjaap">
+      <span class="akhand">AKHAND</span><span class="jaap">JAAP</span>
+    </div>
+  </div>
+</body>
+</html>
